@@ -79,22 +79,25 @@ const projects = [
       "https://www.linkedin.com/posts/muhammad-umar-farooq-a0bb76369_nodejs-expressjs-mongodb-ugcPost-7482752066751307776-MOeR/?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFt5uSsBqGxAlqqVNy9pnqE6lLijiRPR82o",
   },
   {
-    title: "Social Media Platform",
+    title: "E_Commarce smart shopping web",
     live: true,
-    desc: "Full-stack social app with secure auth, profiles, posts, likes and comments — FastAPI + MongoDB on the backend.",
-    tech: ["React", "Node", "Express", "MongoDB", "FastAPI", "TypeScript"],
-    // icon:"fa-solid fa-comments",
-    image: "images/M3.png",
-    github: "https://github.com/mufarooq729-max/Social_Media_Plate_Form",
+    desc: "Responsive E-Commarce shopping with order processing APIs and MongoDB-backed data for customers and managers.",
+    tech: ["HTML", "CSS", "React", "Node", "Express", "MongoDB"],
+    // icon:"fa-solid fa-utensils",
+    image: "images/M10.png",
+    github: "https://github.com/mufarooq729-max/Nexora-E-Comrmrace",
+    LinkedIn:
+      "https://lnkd.in/p/dDezVyEg",
   },
   {
     title: "This Portfolio",
     live: true,
     desc: "The very site you're looking at — designed and built as a living showcase of my work.",
     tech: ["HTML", "CSS", "JavaScript"],
-    icon: "fa-solid fa-globe",
+    // icon: "fa-solid fa-globe",
     image: "images/M4.png",
-    github:"https://github.com/mufarooq729-max/My_Portfolio",
+    github: "https://github.com/mufarooq729-max/My_Portfolio",
+    LinkedIn:"https://lnkd.in/p/dzJ4CQ9c",
   },
   {
     title: "Gallery",
@@ -103,7 +106,7 @@ const projects = [
     tech: ["HTML", "CSS", "JavaScript"],
     icon: "fa-solid fa-globe",
     image: "images/M6.png",
-    github:"https://github.com/mufarooq729-max/codealpa_Gallery",
+    github: "https://github.com/mufarooq729-max/codealpa_Gallery",
     LinkedIn:
       "https://www.linkedin.com/posts/muhammad-umar-farooq-a0bb76369_codealpha-webdevelopment-frontenddevelopment-ugcPost-7488534325324529664-TW-K/?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFt5uSsBqGxAlqqVNy9pnqE6lLijiRPR82o",
   },
@@ -114,9 +117,18 @@ const projects = [
     tech: ["React", "Node", "MongoDB"],
     // icon: "fa-solid fa-music",
     image: "images/M5.png",
-    github:"https://github.com/mufarooq729-max/codealpha_SoundWave",
-    LinkedIn:
-         "https://lnkd.in/p/ekiZy77V"
+    github: "https://github.com/mufarooq729-max/codealpha_SoundWave",
+    LinkedIn: "https://lnkd.in/p/ekiZy77V",
+  },
+  {
+    title: "Social Media Platform",
+    live: true,
+    desc: "Full-stack social app with secure auth, profiles, posts, likes and comments — FastAPI + MongoDB on the backend.",
+    tech: ["React", "Node", "Express", "MongoDB", "FastAPI", "TypeScript"],
+    // icon:"fa-solid fa-comments",
+    image: "images/M3.png",
+    github: "https://github.com/mufarooq729-max/Social_Media_Plate_Form",
+    LinkedIn:"https://github.com/mufarooq729-max/Social_Media_Plate_Form",
   },
   {
     title: "Task Management App",
@@ -133,6 +145,7 @@ const projects = [
     tech: ["Python", "BeautifulSoup", "Requests", "Pandas"],
     icon: "fa-solid fa-spider",
     github: "https://github.com/mufarooq729-max/web-scraping",
+    LinkedIn: "https://github.com/mufarooq729-max/web-scraping",
   },
   {
     title: "AI Chatbot",
@@ -254,7 +267,11 @@ const certData = [
     issuer: "Arch Technologies",
     image: "images/certificate.png",
   },
-  // {title:"Add Certificate Title", issuer:"Issuing Organization", icon:"fa-solid fa-award"},
+  {
+    title: "Frontend Development",
+    issuer: "CodeAlpha",
+    image: "images/certificate2.png",
+  },
   // {title:"Add Certificate Title", issuer:"Issuing Organization", icon:"fa-solid fa-medal"},
 ];
 
@@ -451,6 +468,8 @@ themeToggle.addEventListener("click", () => {
 ============================================================ */
 const header = document.getElementById("site-header");
 const progress = document.getElementById("scroll-progress");
+const heroPhoto = document.querySelector(".photo-inner img");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 window.addEventListener(
   "scroll",
   () => {
@@ -458,6 +477,12 @@ window.addEventListener(
     const h = document.documentElement;
     const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
     progress.style.width = pct + "%";
+    if (heroPhoto && !reduceMotion) {
+      const parallax = Math.min(window.scrollY * -0.08, 0);
+      const scale = 1 + Math.min(window.scrollY / 9000, 0.04);
+      heroPhoto.style.setProperty("--photo-parallax-y", `${parallax}px`);
+      heroPhoto.style.setProperty("--photo-parallax-scale", scale);
+    }
     document.getElementById("back-to-top-wrap");
   },
   { passive: true },

@@ -11,8 +11,8 @@
 }
 
 html[data-theme="dark"] {
-  --bg: #0F172A;
-  --bg-2: #0B1220;
+  --bg: #000000;
+  --bg-2: #000000;
   --card: #1E293B;
   --card-2: #243247;
   --text: #F1F5F9;
@@ -25,8 +25,8 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="light"] {
-  --bg: #F8FAFC;
-  --bg-2: #EFF6FC;
+  --bg: #ffffff;
+  --bg-2: #ffffff;
   --card: #ffffff;
   --card-2: #F1F9FF;
   --text: #111827;
@@ -900,6 +900,19 @@ html[data-theme="light"] .theme-toggle .knob {
   border-radius: 184px 184px 39px 39px;
   background: var(--card);
   overflow: hidden;
+  animation: photo-float 7s ease-in-out infinite;
+}
+
+@keyframes photo-float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-9px);
+  }
 }
 
 .photo-inner img {
@@ -909,6 +922,22 @@ html[data-theme="light"] .theme-toggle .knob {
   object-position: center 42%;
   display: block;
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, .35));
+  transform: translate3d(0, var(--photo-parallax-y, 0px), 0) scale(var(--photo-parallax-scale, 1));
+  transform-origin: center center;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-inner,
+  .skill-card h4 i,
+  .proj-media::after {
+    animation: none;
+  }
+
+  .photo-inner img {
+    transform: none;
+    will-change: auto;
+  }
 }
 
 .photo-badge {
@@ -1214,6 +1243,21 @@ html[data-theme="light"] .theme-toggle .knob {
 .skill-card h4 i {
   color: var(--sky);
   font-size: 19px;
+  animation: icon-breathe 3s ease-in-out infinite;
+}
+
+@keyframes icon-breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 transparent);
+  }
+
+  50% {
+    transform: scale(1.14);
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, .55));
+  }
 }
 
 .skill-row {
@@ -1327,6 +1371,21 @@ html[data-theme="light"] .theme-toggle .knob {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 50% 120%, rgba(56, 189, 248, .35), transparent 60%);
+  animation: media-glow 5s ease-in-out infinite;
+}
+
+@keyframes media-glow {
+
+  0%,
+  100% {
+    opacity: .55;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
 }
 
 .proj-badge {
